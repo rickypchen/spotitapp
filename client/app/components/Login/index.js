@@ -1,7 +1,8 @@
 import React, { Component } from "react"
 import cssModules from "react-css-modules"
 import style from "./style.css"
-
+import Actions from "../../redux/actions"
+import { connect } from 'react-redux'
 import { default as Button } from "../Button"
 
 export class Login extends Component {
@@ -11,11 +12,16 @@ export class Login extends Component {
     this.submit = this.submit.bind(this)
   }
 
-  submit(e) {
-    console.log("Submit button clicked")
+  submit() {
+    const user = {
+      email: document.getElementById("signup-email").value,
+      password: document.getElementById("signup-password").value
+    }
+    this.props.dispatch(Actions.userLogin(user))
   }
-  
+
   render() {
+    console.log(this.props.user)
     return (
       <div className={style.wrapper}>
         <div className={style.form}>
@@ -34,6 +40,7 @@ export class Login extends Component {
               id="signup-password" />
           </div>
           <Button
+            onClick={this.submit}
             style={{ width: "100%" }}
             type="primary">
             Submit
@@ -44,4 +51,8 @@ export class Login extends Component {
   }
 }
 
-export default cssModules(Login, style)
+const mapStateToProps = state => ({
+  user: state.user
+})
+
+export default connect(mapStateToProps)(cssModules(Login, style))
