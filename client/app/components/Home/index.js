@@ -16,7 +16,7 @@ export class Home extends Component {
   render() {
     return (
       <div className={style.leader}>
-        <h1 className={style.title}>Phoenix Chat</h1>
+        <h1 className={style.title}>Spotit App</h1>
         {this.state.formState === "signup" ? <Signup /> : null}
         {this.state.formState === "login" ? <Login /> : null}
         <img
