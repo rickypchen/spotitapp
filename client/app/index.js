@@ -6,8 +6,7 @@ import { default as Home } from "./components/Home"
 import { default as Settings } from "./components/Settings"
 import { Provider } from "react-redux"
 import store from "./redux/store"
-
-const App = props => (<div>{props.children}</div>)
+import { default as App } from "./components/App"
 
 ReactDom.render(
   <Provider store={store}>
