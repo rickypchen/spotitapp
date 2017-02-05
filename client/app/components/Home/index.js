@@ -4,7 +4,7 @@ import { default as style } from "./style.css"
 import { connect } from "react-redux"
 import { default as Signup } from "../Signup"
 import { default as Login } from "../Login"
-import { default as Map } from "../Map"
+import { default as MapView } from "../MapView"
 
 export class Home extends Component {
   constructor(props) {
@@ -43,7 +43,7 @@ export class Home extends Component {
 
   render() {
     if (this.props.user.email) {
-      return (<Map />)
+      return (<MapView />)
     }
     return (
       <div className={style.leader}>
