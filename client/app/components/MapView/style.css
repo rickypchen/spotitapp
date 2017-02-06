@@ -1,0 +1,26 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  width: 400px;
+  position: absolute;
+  left: 0; top: 20; right: 0; bottom: 0;
+  z-index: 10;
+  margin-left: auto;
+  margin-right: auto;
+  height: 120px;
+  top: 100px;
+}
+.input {
+  padding: 1rem 1rem;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  font-size: 1.1em;
+  outline: none;
+}
+.inputGroup {
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 10px 0;
+}
