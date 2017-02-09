@@ -1,33 +1,44 @@
-.leader {
+.container {
   height: 100vh;
+  font-family: sans-serif;
   display: flex;
   position: relative;
-  align-items: center;
-  justify-content: center;
-  flex-flow: column nowrap;
   overflow: hidden;
-  z-index: 100;
-  background: white;
+}
+
+.leader {
+  background: url("./city.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  color: white;
+  padding-left: 20px;
+  padding-top: 100px;
+  padding-right: 20px;
 }
 
 .title {
   font-size: 1.8em;
-  color: rgb(239, 95, 78);
+  margin-top: 1em;
+  color: white;
 }
 
 .changeLink {
   cursor: pointer;
-  color: #42A5F5;
+  color: white;
+  font-size: 1.5em;
 }
 
-.circles {
-  position: absolute;
-  right: 0;
-  left: 0;
-  top: 0;
-  margin: auto;
-  height: 650px;
-  opacity: 0.05;
-  z-index: -1;
-  transform: scale(3);
+.display {
+  color: white;
+  font-size: 3em;
+}
+
+.formBox {
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-flow: column nowrap;
 }

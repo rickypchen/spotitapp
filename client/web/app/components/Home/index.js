@@ -46,15 +46,16 @@ export class Home extends Component {
       return (<MapView />)
     }
     return (
-      <div className={style.leader}>
-        <h1 className={style.title}>Spotit App</h1>
-        {this.state.formState === "signup" ? <Signup /> : null}
-        {this.state.formState === "login" ? <Login /> : null}
-        { this.renderToggleContent() }
-        <img
-          role="presentation"
-          className={style.circles}
-          src="https://s3.amazonaws.com/learnphoenix-static-assets/images/circles-full.png" />
+      <div className={style.container}>
+        <div className={style.leader}>
+          <h1 className={style.display}>Discover what's in your own backyard</h1>
+          <h2 className={style.title}>Introducing the SpotIt App</h2>
+          <div className={style.formBox}>
+            {this.state.formState === "signup" ? <Signup /> : null}
+            {this.state.formState === "login" ? <Login /> : null}
+            { this.renderToggleContent() }
+          </div>
+        </div>
       </div>
     )
   }

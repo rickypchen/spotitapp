@@ -26,6 +26,12 @@ module.exports = {
         loader: 'style!css?modules&importLoaders=1&localIdentName=[local]_[hash:base64:5]!postcss',
         include: path.join(__dirname, 'app'),
         exclude: /node_modules/
+      },
+      {
+        test: /\.(png|jpg)$/,
+        loader: 'url-loader?limit=8192',
+        exclude: /node_modules/,
+        include: path.join(__dirname, 'app')
       }
     ]
   },
