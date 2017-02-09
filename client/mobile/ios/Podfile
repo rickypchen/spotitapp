@@ -1,0 +1,22 @@
+platform :ios, '8.0'
+
+target 'mobile' do
+  pod 'React', path: '../node_modules/react-native', :subspecs => [
+    'Core',
+    'RCTActionSheet',
+    'RCTAnimation',
+    'RCTGeolocation',
+    'RCTImage',
+    'RCTLinkingIOS',
+    'RCTNetwork',
+    'RCTSettings',
+    'RCTText',
+    'RCTVibration',
+    'RCTWebSocket'
+  ]
+
+
+# when not using frameworks  we can do this instead of including the source files in our project (1/4):
+ pod 'react-native-maps', path: '../node_modules/react-native-maps'
+#  pod 'react-native-google-maps', path: '../../'  # <~~ if you need GoogleMaps support on iOS
+end

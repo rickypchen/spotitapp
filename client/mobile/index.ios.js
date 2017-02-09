@@ -5,10 +5,12 @@
  */
 
 import React, { Component } from 'react'
-import { AppRegistry } from 'react-native'
+import { AppRegistry, StyleSheet, Dimensions, View } from 'react-native'
+var {height, width} = Dimensions.get('window')
 import { Container, Header, Title, Button, Footer, Content,
           Left, Right, Body, Icon, Text,
           Form, Item, Input} from 'native-base'
+import MapView from 'react-native-maps'
 
 export default class mobile extends Component {
   constructor(props) {
@@ -43,27 +45,17 @@ export default class mobile extends Component {
   render() {
     if (this.state.username) {
       return (
-        <Container>
-            <Header>
-                <Left>
-                    <Button transparent>
-                        <Icon name='arrow-back' />
-                    </Button>
-                </Left>
-                <Body>
-                    <Title>SpotitApp</Title>
-                </Body>
-                <Right>
-                    <Button transparent>
-                        <Icon name='menu' />
-                    </Button>
-                </Right>
-            </Header>
-            <Content>
-              <Text>Render Map Here</Text>
-            </Content>
-            <Footer>
-            </Footer>
+        <Container
+          style={{position: 'relative', height: 500}}>
+          <MapView
+            style={styles.map}
+            initialRegion={{
+              latitude: 37.78825,
+              longitude: -122.4324,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
+          />
         </Container>
       )
     }
@@ -100,8 +92,19 @@ export default class mobile extends Component {
           <Footer>
           </Footer>
       </Container>
+
     );
   }
 }
+
+const styles = StyleSheet.create({
+  map: {
+    left:0,
+    right: 0,
+    top:0,
+    bottom: 0,
+    position: 'absolute'
+  }
+})
 
 AppRegistry.registerComponent('mobile', () => mobile);
