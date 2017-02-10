@@ -10,9 +10,30 @@ class MapView extends Component {
     super(props)
     this.state = {
       position: "",
-      popupValue: "You are here!"
+      popupValue: "You are here!",
+      image: ""
     }
     this.submit = this.submit.bind(this)
+  }
+  previewImage(evt){
+    var files = evt.target.files; // FileList object
+
+    // Loop through the FileList and render image files as thumbnails.
+    for (var i = 0, f; f = files[i]; i++) {
+      if (!f.type.match('image.*')) {
+        continue;
+      }
+      let reader = new FileReader();
+      reader.onload = (function(theFile) {
+        return function(e) {
+          let output = document.getElementById('preview');
+          output.innerHTML = ['<img style="height: 75px; margin: 10px 5px 0 0;" src="', e.target.result,
+                            '" title="', escape(theFile.name), '"/>'].join('');
+        };
+      })(f);
+
+      reader.readAsDataURL(f);
+    }
   }
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
@@ -23,12 +44,16 @@ class MapView extends Component {
       (error) => alert(JSON.stringify(error)),
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
     )
+    document.getElementById('cameraInput').addEventListener('change', this.previewImage, false);
   }
   submit(e){
     e.preventDefault()
     let popupValue = document.getElementById("discovery-value").value
     this.setState({popupValue})
     document.getElementById("discovery-value").value = ""
+    let preview = document.getElementById('preview');
+    let file = document.getElementById("cameraInput").value = "";
+    preview.removeChild(preview.childNodes[0]);
   }
   render() {
     return (
@@ -40,6 +65,15 @@ class MapView extends Component {
               className={style.input}
               type="text"
               id="discovery-value" />
+          </div>
+          <div className={style.inputGroup}>
+            <input
+              type="file"
+              capture="camera"
+              accept="image/*"
+              id="cameraInput"
+              name="cameraInput" />
+            <output id="preview"></output>
           </div>
           <Button
             onClick={this.submit}
