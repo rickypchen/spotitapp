@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import { default as Button } from "../Button"
 
 export class Login extends Component {
-
   constructor(props) {
     super(props)
     this.submit = this.submit.bind(this)
@@ -21,7 +20,6 @@ export class Login extends Component {
   }
 
   render() {
-    console.log(this.props.user)
     return (
       <div className={style.wrapper}>
         <div className={style.form}>

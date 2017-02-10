@@ -82,5 +82,9 @@ Actions.userAuth = function userAuth() {
   })
 }
 
+Actions.logout = function logout() {
+  localStorage.token = ""
+}
+
 
 export default Actions

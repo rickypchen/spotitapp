@@ -25,6 +25,12 @@ function user(state = {
         username: action.payload.user.username,
         id: action.payload.user.id
       })
+    case "USER_LOGOUT":
+      return Object.assign({}, state, {
+        email: "",
+        username: "",
+        id: ""
+      })
     default: return state
   }
 }

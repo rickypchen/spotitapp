@@ -4,6 +4,8 @@ import style from "./style.css"
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 import ReactDOM from 'react-dom'
 import { default as Button } from "../Button"
+import Actions from "../../redux/actions"
+import { connect } from "react-redux"
 
 class MapView extends Component {
   constructor(props) {
@@ -16,6 +18,7 @@ class MapView extends Component {
     }
     this.submit = this.submit.bind(this)
     this.previewImage = this.previewImage.bind(this)
+    this.logout = this.logout.bind(this)
   }
   previewImage(evt){
     let url = URL.createObjectURL(evt.target.files[0]);
@@ -23,6 +26,9 @@ class MapView extends Component {
     let output = document.getElementById('preview');
     output.innerHTML = ['<img style="height: 75px; margin: 10px 5px 0 0;" src="', url,
                       '" title="', escape(evt.target.files[0].name), '"/>'].join('');
+  }
+  logout(){
+    this.props.dispatch(Actions.logout())
   }
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
@@ -93,4 +99,5 @@ class MapView extends Component {
     )
   }
 }
-export default cssModules(MapView, style)
+
+export default connect()(cssModules(MapView, style))

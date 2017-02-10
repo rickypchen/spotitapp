@@ -43,7 +43,9 @@ export class Home extends Component {
 
   render() {
     if (this.props.user.email) {
-      return (<MapView />)
+      return (
+          <MapView />
+      )
     }
     return (
       <div className={style.container}>
