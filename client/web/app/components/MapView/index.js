@@ -11,29 +11,18 @@ class MapView extends Component {
     this.state = {
       position: "",
       popupValue: "You are here!",
-      image: ""
+      url: "",
+      showMap: false
     }
     this.submit = this.submit.bind(this)
+    this.previewImage = this.previewImage.bind(this)
   }
   previewImage(evt){
-    var files = evt.target.files; // FileList object
-
-    // Loop through the FileList and render image files as thumbnails.
-    for (var i = 0, f; f = files[i]; i++) {
-      if (!f.type.match('image.*')) {
-        continue;
-      }
-      let reader = new FileReader();
-      reader.onload = (function(theFile) {
-        return function(e) {
-          let output = document.getElementById('preview');
-          output.innerHTML = ['<img style="height: 75px; margin: 10px 5px 0 0;" src="', e.target.result,
-                            '" title="', escape(theFile.name), '"/>'].join('');
-        };
-      })(f);
-
-      reader.readAsDataURL(f);
-    }
+    let url = URL.createObjectURL(evt.target.files[0]);
+    this.setState({url});
+    let output = document.getElementById('preview');
+    output.innerHTML = ['<img style="height: 75px; margin: 10px 5px 0 0;" src="', url,
+                      '" title="', escape(evt.target.files[0].name), '"/>'].join('');
   }
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
@@ -52,6 +41,7 @@ class MapView extends Component {
     this.setState({popupValue})
     document.getElementById("discovery-value").value = ""
     let preview = document.getElementById('preview');
+    this.setState({showMap: true})
     let file = document.getElementById("cameraInput").value = "";
     preview.removeChild(preview.childNodes[0]);
   }
@@ -92,7 +82,10 @@ class MapView extends Component {
           <Marker
             position={this.state.position}>
             <Popup>
-              <span id="current-location">{this.state.popupValue}</span>
+              <span id="current-location">
+                {this.state.popupValue}
+                <img id="post-image" style={{display: this.state.showMap ? 'block' : 'none' }} className={style.thumb} src={this.state.url}></img>
+              </span>
             </Popup>
           </Marker>
         </Map>
